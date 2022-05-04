@@ -4,6 +4,7 @@ import { v4 as uuid } from 'uuid';
 import List from '../list/list.js'
 import Form from '../form/form.js';
 import Header from '../header/header.js';
+import { Col, Row } from 'react-bootstrap';
 
 const ToDo = () => {
 
@@ -48,13 +49,17 @@ const ToDo = () => {
 
   return (
     <>
-
+    <div className='filler'>
+    </div>
       <Header incomplete={incomplete} />
-
+    <Row>
+      <Col>
       <Form handleChange={handleChange} handleSubmit={handleSubmit} defaultValues={defaultValues} />
-
+      </Col>
+      <Col>
       <List list={list} />
-
+      </Col>
+    </Row>
     </>
   );
 };
