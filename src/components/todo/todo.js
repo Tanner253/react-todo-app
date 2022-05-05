@@ -15,6 +15,7 @@ const ToDo = () => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem, defaultValues);
+  
 
   function addItem(item) {
     console.log(item);
@@ -36,10 +37,10 @@ const ToDo = () => {
       }
       return item;
     });
-
     setList(items);
-
   }
+  
+  const chunk = (arr, size) => arr.reduce((acc, e, i) => (i % size ? acc[acc.length - 1].push(e) : acc.push([e]), acc), []);
 
   useEffect(() => {
     let incompleteCount = list.filter(item => !item.complete).length;
@@ -52,12 +53,12 @@ const ToDo = () => {
     <div className='filler'>
     </div>
       <Header incomplete={incomplete} />
-    <Row>
+    <Row id="row">
       <Col>
-      <Form handleChange={handleChange} handleSubmit={handleSubmit} defaultValues={defaultValues} />
+      <Form id="form" handleChange={handleChange} handleSubmit={handleSubmit} defaultValues={defaultValues} />
       </Col>
       <Col>
-      <List list={list} />
+      <List id="list" list={chunk(list, defaultValues.difficulty)} />
       </Col>
     </Row>
     </>
